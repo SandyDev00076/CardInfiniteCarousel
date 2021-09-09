@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cards Marquee</title>
+  </head>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    *,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+    }
+
+    .wrapper {
+      width: 300px;
+      overflow-x: hidden;
+    }
+
+    .cards {
+      position: relative;
+      height: 150px;
+    }
+
+    .card {
+      position: absolute;
+      top: 0;
+      left: 30px;
+      border: 1px solid #333;
+      min-width: 240px;
+      padding: 32px;
+      transform: translateX(300px);
+    }
+
+    .line1 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .line2 {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .animateSlide {
+      animation: cardSlide 4s ease-in-out;
+    }
+
+    @keyframes cardSlide {
+      0% {
+        transform: translateX(300px);
+      }
+
+      10%,
+      80% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(-300px);
+      }
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="cards">
+        <div class="card">
+          <h1 class="line1">Title1</h1>
+          <h2 class="line2">Content1</h2>
+        </div>
+        <div class="card">
+          <h1 class="line1">Title2</h1>
+          <h2 class="line2">Content2</h2>
+        </div>
+        <div class="card">
+          <h1 class="line1">Title3</h1>
+          <h2 class="line2">Content3</h2>
+        </div>
+        <div class="card">
+          <h1 class="line1">Title4</h1>
+          <h2 class="line2">Content4</h2>
+        </div>
+        <div class="card">
+          <h1 class="line1">Title5</h1>
+          <h2 class="line2">Content5</h2>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const CARD_ANIM_DURATION = 4000;
+    const cards = document.querySelectorAll(".card");
+    function startAnim() {
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add("animateSlide");
+          setTimeout(() => {
+            card.classList.remove("animateSlide");
+          }, CARD_ANIM_DURATION);
+        }, index * CARD_ANIM_DURATION);
+      });
+    }
+    startAnim();
+    setInterval(() => {
+      startAnim();
+    }, cards.length * CARD_ANIM_DURATION);
+  </script>
+</html>
